@@ -15,10 +15,7 @@ def perform_ner(*args, **kwargs):
     # Process the input text with spaCy NLP model
     doc = nlp(query)
 
-    # Extract named entities and categorize them
-    entities = [(entity.text, entity.label_) for entity in doc.ents]
-
-    return entities
+    return [(entity.text, entity.label_) for entity in doc.ents]
 
 
 if __name__ == "__main__":

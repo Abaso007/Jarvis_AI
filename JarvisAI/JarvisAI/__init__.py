@@ -66,22 +66,23 @@ def add_action(intent: str, action: object):
         if action_exists:
             print(f"Previous examples for intent '{intent}': {actions[action_index]['example']}")
             overwrite = input(f"Intent '{intent}' already exists. Do you want to overwrite? (y/n)")
-            if overwrite.lower() == "y":
-                num_examples = int(input("How many examples do you want to add? (maximum 3): "))
-                examples = []
-                for i in range(num_examples):
-                    examples.append(input(f"Enter example {i + 1} for intent {intent}: "))
-                actions[action_index] = {
-                    "intent": intent,
-                    "example": examples
-                }
-            else:
+            if overwrite.lower() != "y":
                 return "Intent not overwritten."
+            num_examples = int(input("How many examples do you want to add? (maximum 3): "))
+            examples = [
+                input(f"Enter example {i + 1} for intent {intent}: ")
+                for i in range(num_examples)
+            ]
+            actions[action_index] = {
+                "intent": intent,
+                "example": examples
+            }
         else:
             num_examples = int(input("How many examples do you want to add? (maximum 10): "))
-            examples = []
-            for i in range(num_examples):
-                examples.append(input(f"Enter example {i + 1} for intent {intent}: "))
+            examples = [
+                input(f"Enter example {i + 1} for intent {intent}: ")
+                for i in range(num_examples)
+            ]
             actions.append({
                 "intent": intent,
                 "example": examples
@@ -223,7 +224,7 @@ if __name__ == "__main__":
         print(entities)
         # write your code here to do something with the command
         # perform some tasks # return is optional
-        return command + ' Executed'
+        return f'{command} Executed'
 
 
     jarvis = JarvisAI(input_mechanism='text', output_mechanism='text',

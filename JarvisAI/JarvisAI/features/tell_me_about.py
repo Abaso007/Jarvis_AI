@@ -11,8 +11,7 @@ def tell_me_about(*args, **kwargs):
     try:
         ny = wikipedia.page(topic)
         res = str(ny.content[:500].encode('utf-8'))
-        res = re.sub('[^a-zA-Z.\d\s]', '', res)[1:]
-        return res
+        return re.sub('[^a-zA-Z.\d\s]', '', res)[1:]
     except Exception as e:
         print(e)
         return False

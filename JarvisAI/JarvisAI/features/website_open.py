@@ -6,11 +6,10 @@ def website_opener(*args, **kwargs):
     input_text = kwargs.get("query")
     domain = input_text.lower().split(" ")[-1]
     extension = re.search(r"[.]", domain)
-    if not extension:
-        if not domain.endswith(".com"):
-            domain = domain + ".com"
+    if not extension and not domain.endswith(".com"):
+        domain = f"{domain}.com"
     try:
-        url = 'https://www.' + domain
+        url = f'https://www.{domain}'
         webbrowser.open(url)
         return True
     except Exception as e:

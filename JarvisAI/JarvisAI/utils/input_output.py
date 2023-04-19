@@ -35,12 +35,11 @@ class JarvisInputOutput:
     def text_input(self):
         if self.input_mechanism == 'text':
             return input("Enter your query: ")
-        else:
-            self.logging.exception("Invalid input mechanism")
-            raise ValueError("Invalid input mechanism")
+        self.logging.exception("Invalid input mechanism")
+        raise ValueError("Invalid input mechanism")
 
     def text_output(self, text):
-        if self.output_mechanism == 'text' or self.output_mechanism == 'both':
+        if self.output_mechanism in ['text', 'both']:
             print(text)
         else:
             self.logging.exception("Invalid output mechanism")
@@ -59,16 +58,13 @@ class JarvisInputOutput:
                                                         key=self.google_speech_api_key,
                                                         duration=self.duration_listening)
             print(f"You Said: {command}")
-            if status:
-                return command
-            else:
-                return None
+            return command if status else None
         else:
             self.logging.exception("Invalid input mechanism")
             raise ValueError("Invalid input mechanism")
 
     def voice_output(self, *args, **kwargs):
-        if self.output_mechanism == 'voice' or self.output_mechanism == 'both':
+        if self.output_mechanism in ['voice', 'both']:
             text = kwargs.get('text', None)
             text_to_speech(text=text, lang='en', backend_tts_api=self.backend_tts_api)
         else:

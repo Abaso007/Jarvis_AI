@@ -25,11 +25,10 @@ def get_country(command):  # For getting only the country name for the whole que
 
 
 def get_covid_cases(country):  # For getting current covid cases
-    totalActiveCases = 0
-    response = requests.get('https://api.covid19api.com/live/country/' + country + '/status/confirmed').json()
-    for data in response:
-        totalActiveCases += data.get('Active')
-    return totalActiveCases
+    response = requests.get(
+        f'https://api.covid19api.com/live/country/{country}/status/confirmed'
+    ).json()
+    return sum(data.get('Active') for data in response)
 
 
 if __name__ == '__main__':
