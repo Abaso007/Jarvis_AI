@@ -27,7 +27,15 @@ def start_volume_control(*args, **kwargs):
         success, img = cap.read()  # If camera works capture an image
         img = cv2.flip(img, 1)
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # Convert to rgb
-        cv2.putText(img, f"Press SPACE to stop", (20, 80), cv2.FONT_ITALIC, 1, (0, 255, 98), 3)
+        cv2.putText(
+            img,
+            "Press SPACE to stop",
+            (20, 80),
+            cv2.FONT_ITALIC,
+            1,
+            (0, 255, 98),
+            3,
+        )
 
         # Collection of gesture information
         results = hands.process(imgRGB)  # completes the image processing.

@@ -15,12 +15,11 @@ def check_local_intent(text):
     try:
         if not os.path.exists('actions.json'):
             return None
-        else:
-            with open('actions.json', 'r') as f:
-                actions = json.load(f)
-            for action in actions:
-                if text in action['example']:
-                    return action['intent']
+        with open('actions.json', 'r') as f:
+            actions = json.load(f)
+        for action in actions:
+            if text in action['example']:
+                return action['intent']
     except Exception as e:
         return e
 

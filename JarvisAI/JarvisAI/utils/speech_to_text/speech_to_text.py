@@ -24,7 +24,7 @@ def record_audio(duration=5):
                     output=True,
                     frames_per_buffer=chunk)
     frames = []
-    for i in range(int(sample_rate / chunk * record_seconds)):
+    for _ in range(int(sample_rate / chunk * record_seconds)):
         data = stream.read(chunk)
         # if you want to hear your voice while recording
         # stream.write(data)

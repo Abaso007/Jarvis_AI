@@ -4,17 +4,14 @@ try:
     st = speedtest.Speedtest()
 except:
     print("Please check your internet connection.")
-    pass
 
 
 def download_speed():
-    down = round(st.download() / 10 ** 6, 2)
-    return down
+    return round(st.download() / 10 ** 6, 2)
 
 
 def upload_speed():
-    up = round(st.upload() / 10 ** 6, 2)
-    return up
+    return round(st.upload() / 10 ** 6, 2)
 
 
 def ping():
@@ -30,8 +27,21 @@ def speed_test(*args, **kwargs):
         # print('Download Speed: ' + str(download_speed()) + 'MB/s')
         # print('Upload Speed: ' + str(upload_speed()) + ' MB/s')
         # print('Ping: ' + str(ping()) + ' ms')
-        return "Download Speed: " + str(download_speed()) + "MB/s" + "\n Upload Speed: " + str(
-            upload_speed()) + " MB/s" + "\n Ping: " + str(ping()) + " ms"
+        return (
+            (
+                (
+                    (
+                        f"Download Speed: {str(download_speed())}MB/s"
+                        + "\n Upload Speed: "
+                        + str(upload_speed())
+                    )
+                    + " MB/s"
+                )
+                + "\n Ping: "
+            )
+            + str(ping())
+            + " ms"
+        )
     except Exception as e:
         print(e)
         return "Error in internet speed test"

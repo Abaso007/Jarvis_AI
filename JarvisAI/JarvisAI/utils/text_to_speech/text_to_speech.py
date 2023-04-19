@@ -57,11 +57,8 @@ def text_to_speech(text, lang='en', backend_tts_api='gtts'):
                 option = input(f"Choose any- {list(voices_dict.keys())}: ")
                 with open(voice_file_name, 'w') as f:
                     f.write(voices_dict.get(option, voices[0].id))
-                with open(voice_file_name, 'r') as f:
-                    voice_property = f.read()
-            else:
-                with open(voice_file_name, 'r') as f:
-                    voice_property = f.read()
+            with open(voice_file_name, 'r') as f:
+                voice_property = f.read()
         except Exception as e:
             print(e)
             print("Error occurred while creating config file for voices in pyttsx3 in 'text2speech'.",
